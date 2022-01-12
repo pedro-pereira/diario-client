@@ -39,5 +39,34 @@
 		</dependency>
 
 	</dependencies>
-
+	
+	<build>
+  		<plugins>
+    		<plugin>
+      			<artifactId>maven-assembly-plugin</artifactId>
+      			<configuration>
+        			<archive>
+          				<manifest>
+            				<mainClass>br.ufc.smd.Principal</mainClass>
+          				</manifest>
+        			</archive>
+       				<descriptorRefs>
+          				<descriptorRef>jar-with-dependencies</descriptorRef>
+       				</descriptorRefs>
+       				<finalName>${project.name}</finalName>
+       				
+       				<resources>
+      					<resource>
+        					<directory>src/main/resources</directory>
+        					<includes>
+          						<include>diario-sono-5a1db-firebase-adminsdk-5z2p8-72da99c367.json</include>
+        					</includes>
+      					</resource>
+    				</resources>
+       				
+      			</configuration>
+    		</plugin>
+  		</plugins>
+	</build>
+	
 </project>

@@ -3,6 +3,7 @@ package br.ufc.smd;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -78,8 +79,14 @@ public class Principal {
 
 
 			// Início - Configuração da conexão com a base de dados
-			FileInputStream serviceAccount = new FileInputStream(
-					"src/main/resources/diario-sono-5a1db-firebase-adminsdk-5z2p8-72da99c367.json");
+			
+			// Para ser usado durante a fase de DESENVOLVIMENTO
+			// String PATH_TO_PACKAGE = "src/main/resources/diario-sono-5a1db-firebase-adminsdk-5z2p8-72da99c367.json";
+			
+			// Para ser usado durante a fase de PRODUÇÃO (empacotando pelo Maven)
+			String PATH_TO_PACKAGE = System.getProperty("user.dir") + "\\diario-client\\diario-sono-key.json";
+			
+			FileInputStream serviceAccount = new FileInputStream(PATH_TO_PACKAGE);
 
 			FirebaseOptions options = new FirebaseOptions.Builder()
 					                                     .setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();

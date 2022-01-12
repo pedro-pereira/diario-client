@@ -1,0 +1,1 @@
+java -jar diario-client\diario-client-jar-with-dependencies.jar
