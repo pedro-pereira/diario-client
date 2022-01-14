@@ -37,7 +37,60 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.5</version>
 		</dependency>
+		
+		<!--
+		<dependency>
+      		<groupId>com.google.gcm</groupId>
+      		<artifactId>gcm-server</artifactId>
+      		<version>1.0.0</version>
+    	</dependency>
+    	<dependency>
+      		<groupId>com.googlecode.json-simple</groupId>
+      		<artifactId>json-simple</artifactId>
+      		<version>1.1.1</version>
+    	</dependency>
+    	<dependency>
+      		<groupId>com.google.firebase</groupId>
+      		<artifactId>firebase-server-sdk</artifactId>
+      		<version>3.0.0</version>
+    	</dependency>
+    
+		<dependency>
+    		<groupId>com.squareup.retrofit2</groupId>
+    		<artifactId>retrofit</artifactId>
+    		<version>2.9.0</version>
+		</dependency>
+		-->
 
 	</dependencies>
-
+	
+	<build>
+  		<plugins>
+    		<plugin>
+      			<artifactId>maven-assembly-plugin</artifactId>
+      			<configuration>
+        			<archive>
+          				<manifest>
+            				<mainClass>br.ufc.smd.Principal</mainClass>
+          				</manifest>
+        			</archive>
+       				<descriptorRefs>
+          				<descriptorRef>jar-with-dependencies</descriptorRef>
+       				</descriptorRefs>
+       				<finalName>${project.name}</finalName>
+       				
+       				<resources>
+      					<resource>
+        					<directory>src/main/resources</directory>
+        					<includes>
+          						<include>diario-sono-5a1db-firebase-adminsdk-5z2p8-72da99c367.json</include>
+        					</includes>
+      					</resource>
+    				</resources>
+       				
+      			</configuration>
+    		</plugin>
+  		</plugins>
+	</build>
+	
 </project>

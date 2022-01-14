@@ -1,9 +1,11 @@
+// https://firebase.google.com/docs/cloud-messaging/send-message#java
+// https://pt.stackoverflow.com/questions/290665/firebase-cloud-messaging-fcm-push-notification-java
+
 package br.ufc.smd;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -38,6 +40,10 @@ import com.google.cloud.firestore.Firestore;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingException;
+import com.google.firebase.messaging.Message;
+import com.google.firebase.messaging.Notification;
 
 public class Principal {
 
@@ -81,16 +87,17 @@ public class Principal {
 			// Início - Configuração da conexão com a base de dados
 			
 			// Para ser usado durante a fase de DESENVOLVIMENTO
-			// String PATH_TO_PACKAGE = "src/main/resources/diario-sono-5a1db-firebase-adminsdk-5z2p8-72da99c367.json";
+			final String PATH_TO_PACKAGE = "src/main/resources/diario-sono-5a1db-firebase-adminsdk-5z2p8-72da99c367.json";
 			
 			// Para ser usado durante a fase de PRODUÇÃO (empacotando pelo Maven)
-			String PATH_TO_PACKAGE = System.getProperty("user.dir") + "\\diario-client\\diario-sono-key.json";
+			// final String PATH_TO_PACKAGE = System.getProperty("user.dir") + "\\diario-client\\diario-sono-key.json";
 			
 			FileInputStream serviceAccount = new FileInputStream(PATH_TO_PACKAGE);
 
 			FirebaseOptions options = new FirebaseOptions.Builder()
 					                                     .setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();
-			FirebaseApp.initializeApp(options);
+			final FirebaseApp firebaseApp = FirebaseApp.initializeApp(options);
+			
 			final Firestore dbFirestore = FirestoreClient.getFirestore();
 			// Fim - Configuração da conexão com a base de dados
 			
@@ -219,11 +226,32 @@ public class Principal {
 									  };
 					modeloTabelaAlerta.addRow(alerta);
 					textDescricaoAlerta.setText("");
+					
+					// Criação de notificação no Cloud Messsage - Início
+					/*
+					try {
+						// String key = "AAAAs-aOpnI:APA91bE83bmPxAHS5yCwwrHMkNig_HVcW_BmVrvrjYo0vi4nEBHPqeRF5GANu7_4lL8hKHlKZJc4tIWIbkh_ZEgPFMTHqs6rqqBXxOFfIF7ALclo5mbc3egrRaWntycZnsdKmgARPQm1";
+						String topic = "centralDeAlertas";
+						FirebaseMessaging firebaseMessaging = FirebaseMessaging.getInstance(firebaseApp);
+					
+						Message message = Message.builder()
+							    .setNotification(Notification.builder()
+							        .setTitle(camposAlerta.get("descricao").toString())
+							        .setBody(camposAlerta.get("descricao").toString())
+							        .build())
+							    .setTopic(topic)
+							    .build();
+						String response = firebaseMessaging.send(message);
+					} catch (FirebaseMessagingException e) {
+							e.printStackTrace();
+					}
+					*/					
+					// Criação de notificação no Cloud Messsage - Fim
 			    }
 			});
 			// Alertas - Fim - Cadastro
-
-
+			
+			
 			// Alertas - Início - Listagem
 			modeloTabelaAlerta.addColumn("Data de cadastro");
 			modeloTabelaAlerta.addColumn("Descrição");
