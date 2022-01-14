@@ -245,7 +245,7 @@ public class Principal {
 					} catch (FirebaseMessagingException e) {
 							e.printStackTrace();
 					}
-					*/					
+					*/	
 					// Criação de notificação no Cloud Messsage - Fim
 			    }
 			});
