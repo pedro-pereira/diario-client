@@ -228,7 +228,7 @@ public class Principal {
 					textDescricaoAlerta.setText("");
 					
 					// Criação de notificação no Cloud Messsage - Início
-					/*
+					
 					try {
 						// String key = "AAAAs-aOpnI:APA91bE83bmPxAHS5yCwwrHMkNig_HVcW_BmVrvrjYo0vi4nEBHPqeRF5GANu7_4lL8hKHlKZJc4tIWIbkh_ZEgPFMTHqs6rqqBXxOFfIF7ALclo5mbc3egrRaWntycZnsdKmgARPQm1";
 						String topic = "centralDeAlertas";
@@ -245,7 +245,7 @@ public class Principal {
 					} catch (FirebaseMessagingException e) {
 							e.printStackTrace();
 					}
-					*/	
+						
 					// Criação de notificação no Cloud Messsage - Fim
 			    }
 			});
